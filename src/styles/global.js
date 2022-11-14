@@ -1,0 +1,26 @@
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyled = createGlobalStyle`
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: #D2DBDC;
+    font-family: 'Segoe UI', Helvetica Neue, Helvetica, Lucida Grande, Arial;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+`
+
+export default GlobalStyled
