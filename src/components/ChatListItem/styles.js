@@ -10,6 +10,10 @@ export const Container = styled.div`
     background-color: #F5F5F5;
   }
 
+  &.active{
+    background-color: #EBEBEB;
+  }
+
   img {
     width: 50px;
     height: 50px;

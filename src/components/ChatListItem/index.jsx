@@ -1,12 +1,12 @@
 import { Container, Content } from './styles'
 
-export function ChatList() {
+export function ChatList({onClick, active, data}) {
   return (
-    <Container>
-      <img src="https://www.w3schools.com/howto/img_avatar.png" />
+    <Container className={active ? 'active' : ''} onClick={onClick}>
+     <img src={data.avatar} />
       <Content>
         <div className="chatListItem">
-          <div className="chatName">Andre Silva</div>
+          <div className="chatName">{data.title}</div>
           <div className='chatData'>15:00</div>
         </div>
         <div className='chatListItem'>
