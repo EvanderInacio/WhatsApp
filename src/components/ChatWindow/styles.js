@@ -35,7 +35,7 @@ export const ChatHeader = styled.header`
     display: flex;
     align-items: center;
     margin-right: 15px;
-
+    
     .btn {
       width: 40px;
       height: 40px;
@@ -52,7 +52,23 @@ export const ChatBody = styled.div`
   flex: 1;
   overflow-y: auto;
   background-color: #E5DDD5;
+  padding: 20px 30px;
 
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+`
+
+export const ChatEmoji = styled.div`
+  height: 260px;
+  overflow-y: hidden;
+  transition: all ease 0.3s;
 `
 
 export const ChatFooter = styled.footer`
