@@ -11,6 +11,7 @@ import SearchIcon from '@mui/icons-material/Search'
 import { ChatList } from './components/ChatListItem'
 import { ChatIntro } from './components/ChatIntro'
 import { ChatWindow } from './components/ChatWindow'
+import { NewChat } from './components/NewChat'
 
 function App() {
   const [chatList, setChatList] = useState([
@@ -36,10 +37,21 @@ function App() {
     avatar: "https://www.w3schools.com/howto/img_avatar.png",
     name: "Fulano"
   })
+  const [showNewChat, setShowNewChat] = useState(false)
+
+  const handleNewChat = () => {
+    setShowNewChat(true)
+  }
 
   return (
     <Container>
       <Sidebar>
+        <NewChat 
+          chatList={chatList}
+          user={user}
+          show={showNewChat}
+          setShow={setShowNewChat}
+        />
         <HeaderSidebar>
           <img src={user.avatar} />
           <div className="button">
@@ -47,7 +59,7 @@ function App() {
               <DonutLargeIcon style={{ color: '#919191' }} />
             </div>
 
-            <div className="btn">
+            <div onClick={handleNewChat} className="btn">
               <ChatIcon style={{ color: '#919191' }} />
             </div>
 
