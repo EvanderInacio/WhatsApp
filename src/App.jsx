@@ -12,35 +12,36 @@ import { ChatList } from './components/ChatListItem'
 import { ChatIntro } from './components/ChatIntro'
 import { ChatWindow } from './components/ChatWindow'
 import { NewChat } from './components/NewChat'
+import { Login } from './components/Login'
+import Api from './Api'
 
 function App() {
-  const [chatList, setChatList] = useState([
-    {
-      chatId: 1,
-      title: 'Fulano',
-      avatar: 'https://www.w3schools.com/howto/img_avatar.png'
-    },
-    {
-      chatId: 2,
-      title: 'Ciclano',
-      avatar: 'https://www.w3schools.com/howto/img_avatar.png'
-    },
-    {
-      chatId: 3,
-      title: 'Beltrano',
-      avatar: 'https://www.w3schools.com/howto/img_avatar.png'
-    }
-  ])
+  const [chatList, setChatList] = useState([])
   const [activeChat, setActiveChat] = useState({})
   const [user, setUser] = useState({
-    id: 1234,
-    avatar: "https://www.w3schools.com/howto/img_avatar.png",
-    name: "Fulano"
+    id: '7MmnbTF4MICbTJtvBNHK',
+    name: 'Evander',
+    avatar: 'https://www.w3schools.com/howto/img_avatar.png'
   })
   const [showNewChat, setShowNewChat] = useState(false)
 
   const handleNewChat = () => {
     setShowNewChat(true)
+  }
+
+  const handleLoginData = async u => {
+    let newUser = {
+      id: u.uid,
+      name: u.displayName,
+      avatar: u.photoURL
+    }
+    await Api.addUser(newUser)
+    setUser(newUser)
+    console.log(newUser)
+  }
+
+  if(!user) {
+    return ( <Login onReceive={handleLoginData}/> )
   }
 
   return (
@@ -53,7 +54,10 @@ function App() {
           setShow={setShowNewChat}
         />
         <HeaderSidebar>
-          <img src={user.avatar} />
+          <div className='header'>
+            <img src={user.avatar} alt="" />
+            <p>{user.name}</p>
+          </div>
           <div className="button">
             <div className="btn">
               <DonutLargeIcon style={{ color: '#919191' }} />

@@ -21,12 +21,21 @@ export const HeaderSidebar = styled.header`
   align-items: center;
   padding: 0 15px;
 
-  img {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    cursor: pointer;
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
   }
+
 
   .button{
     display: flex;
