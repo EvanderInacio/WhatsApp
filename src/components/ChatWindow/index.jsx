@@ -14,11 +14,12 @@ import AttachFileIcon from '@mui/icons-material/AttachFile'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon'
 import CloseIcon from '@mui/icons-material/Close'
+import Api from '../../Api'
+import { MessageItem } from '../MessageItem'
 import SendIcon from '@mui/icons-material/Send'
 import MicIcon from '@mui/icons-material/Mic'
-import { MessageItem } from '../MessageItem'
 
-export function ChatWindow({user}) {
+export function ChatWindow({user, data}) {
 
   const body = useRef()
 
@@ -31,26 +32,14 @@ export function ChatWindow({user}) {
   const [emojiOpen, setEmojiOpen] = useState(false)
   const [text, setText] = useState('')
   const [listening, setListening] = useState(false)
-  const [list, setList ] = useState([
-    {author: 123, body: 'bla'},
-    {author: 123, body: 'lorem, bla'},
-    {author: 1234, body: 'lorem'},
-    {author: 1234, body: 'lorem, lorem'},
-    {author: 123, body: 'lorem, bla'},
-    {author: 1234, body: 'lorem'},
-    {author: 123, body: 'bla'},
-    {author: 123, body: 'lorem, bla'},
-    {author: 1234, body: 'lorem'},
-    {author: 1234, body: 'lorem, lorem'},
-    {author: 123, body: 'lorem, bla'},
-    {author: 1234, body: 'lorem'},
-    {author: 123, body: 'bla'},
-    {author: 123, body: 'lorem, bla'},
-    {author: 1234, body: 'lorem'},
-    {author: 1234, body: 'lorem, lorem'},
-    {author: 123, body: 'lorem, bla'},
-    {author: 1234, body: 'lorem'},
-  ])
+  const [list, setList ] = useState([])
+  const [users, setUsers] = useState([])
+  
+  useEffect(() => {
+    setList([])
+    let unsub = Api.onChatContent(data.chatId, setList, setUsers)
+    return unsub
+  }, [data.chatId])
 
   useEffect(() => {
     if (body.current.scrollHeight > body.current.offsetHeight) {
@@ -87,16 +76,26 @@ export function ChatWindow({user}) {
     }
   }
 
-  const handleSendClick = () => {
+  const handleInputKeyUp = (e) => {
+    if(e.keyCode == 13){
+      handleSendClick()
+    }
+  }
 
+  const handleSendClick = () => {
+    if(text !== '') {
+      Api.sendMessage(data, user.id, 'text', text, users )
+      setText('')
+      setEmojiOpen(false)
+    }
   }
 
   return (
     <ChatContainer>
       <ChatHeader>
         <div className="header">
-          <img src="https://www.w3schools.com/howto/img_avatar.png" />
-          <div className="name">Fulano</div>
+          <img src={data.image} />
+          <div className="name">{data.title}</div>
         </div>
 
         <div className="buttons">
@@ -113,7 +112,7 @@ export function ChatWindow({user}) {
       </ChatHeader>
 
       <ChatBody ref={body}>
-        {list.map((item, key) => (
+        {list?.map((item, key) => (
           <MessageItem 
             key={key}
             data={item}
@@ -159,6 +158,7 @@ export function ChatWindow({user}) {
             placeholder="Digite uma mensagem"
             value={text}
             onChange={e => setText(e.target.value)}
+            onKeyUp={handleInputKeyUp}
           />
         </div>
         <div className="buttons">

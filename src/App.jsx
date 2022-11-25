@@ -18,12 +18,15 @@ import Api from './Api'
 function App() {
   const [chatList, setChatList] = useState([])
   const [activeChat, setActiveChat] = useState({})
-  const [user, setUser] = useState({
-    id: '7MmnbTF4MICbTJtvBNHK',
-    name: 'Evander',
-    avatar: 'https://www.w3schools.com/howto/img_avatar.png'
-  })
+  const [user, setUser] = useState(null)
   const [showNewChat, setShowNewChat] = useState(false)
+
+  useEffect(() => {
+    if (user !== null) {
+      let unsub = Api.onChatList(user.id, setChatList)
+      return unsub
+    }
+  }, [user])
 
   const handleNewChat = () => {
     setShowNewChat(true)
@@ -40,21 +43,21 @@ function App() {
     console.log(newUser)
   }
 
-  if(!user) {
-    return ( <Login onReceive={handleLoginData}/> )
+  if (!user) {
+    return <Login onReceive={handleLoginData} />
   }
 
   return (
     <Container>
       <Sidebar>
-        <NewChat 
+        <NewChat
           chatList={chatList}
           user={user}
           show={showNewChat}
           setShow={setShowNewChat}
         />
         <HeaderSidebar>
-          <div className='header'>
+          <div className="header">
             <img src={user.avatar} alt="" />
             <p>{user.name}</p>
           </div>
@@ -85,17 +88,24 @@ function App() {
 
         <div className="chatList">
           {chatList.map((item, key) => (
-            <ChatList 
+            <ChatList
               key={key}
               data={item}
-              active={activeChat.chatId === chatList[key].chatId} 
-              onClick={() => setActiveChat(chatList[key])} 
+              active={activeChat.chatId === chatList[key].chatId}
+              onClick={() => setActiveChat(chatList[key])}
             />
           ))}
         </div>
       </Sidebar>
       <Content>
-        {activeChat.chatId !== undefined && <ChatWindow user={user} />}
+        {
+          activeChat.chatId !== undefined && 
+          <ChatWindow 
+            user={user}
+            data={activeChat} 
+          />
+        }
+
         {activeChat.chatId === undefined && <ChatIntro />}
       </Content>
     </Container>
