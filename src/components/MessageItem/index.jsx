@@ -21,8 +21,8 @@ export function MessageItem({data, user}) {
       justifyContent: user.id === data.author ? 'flex-end' : 'flex-start'
     }}>
       <Item
-        style={{backgroundColor: user.id === data.author ? '#DCF8C6' : '#FFF' }}
-      >
+        style={{backgroundColor: user.id === data.author ? '#D9FDD3' : '#FFF' }}
+      > 
         <div className="messageText">{data.body}</div>
         <div className="messageDate">{time}</div>
       </Item>

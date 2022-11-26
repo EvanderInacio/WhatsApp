@@ -5,10 +5,11 @@ const GlobalStyled = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    outline: 0;
+        transition: 0.1s;
   }
-  
+
   body {
-    background: #D2DBDC;
     font-family: 'Segoe UI', Helvetica Neue, Helvetica, Lucida Grande, Arial;
   }
 

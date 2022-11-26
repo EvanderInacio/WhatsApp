@@ -5,11 +5,11 @@ export const Sidebar = styled.div`
   max-width: 415px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #DDD;
+  border-right: 1px solid ${(props) => props.theme.border};
 
   .chatList{
-    flex: 1;
-    background-color: #fff;
+    flex: 1;  
+    background-color: ${(props) => props.theme.background};
     overflow-y: auto;
   }
 `
@@ -20,7 +20,7 @@ export const HeaderSidebar = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 15px;
-
+  
   .header {
     display: flex;
     justify-content: center;
@@ -32,6 +32,11 @@ export const HeaderSidebar = styled.header`
       height: 40px;
       border-radius: 20px;
       cursor: pointer;
+    }
+
+    p{
+      margin-left: 2px;
+      color: ${(props) => props.theme.text};
     }
 
   }
@@ -54,14 +59,13 @@ export const HeaderSidebar = styled.header`
 `
 
 export const Search = styled.div`
-  background: #F6F6F6;
-  border-bottom: 1px solid #eee;
+  background: ${(props) => props.theme.background};
   padding: 5px 15px;
 
   .input{
-    background-color: #FFF;
+    background-color: ${(props) => props.theme.backgroundSecond};
     height: 40px;
-    border-radius: 20px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     padding: 0 10px;
@@ -72,6 +76,7 @@ export const Search = styled.div`
       outline: 0;
       background-color: transparent;
       margin-left: 10px;
+      color: ${(props) => props.theme.text};
     }
   }
 

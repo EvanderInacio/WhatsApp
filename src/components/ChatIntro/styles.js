@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Intro = styled.div`
  display: flex;
  flex-direction: column;
- background-color: #F8F9FA;
+ background-color: ${(props) => props.theme.background};
  justify-content: center;
  align-items: center;
  height: 100vh;
@@ -11,7 +11,7 @@ export const Intro = styled.div`
 
  h1 {
   font-size: 32px;
-  color: #525252;
+  color: ${(props) => props.theme.text};
   font-weight: normal;
   margin-top: 30px;
   text-align: center;
@@ -23,7 +23,7 @@ export const Intro = styled.div`
   margin-top: 20px;
   line-height: 20px;
   text-align: center;
-  color: #777;
+  color: ${(props) => props.theme.text};
  }
  
 `

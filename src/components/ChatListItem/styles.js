@@ -7,11 +7,11 @@ export const Container = styled.div`
   height: 70px;
 
   &:hover{
-    background-color: #F5F5F5;
+    background-color: ${(props) => props.theme.backgroundHover};
   }
 
   &.active{
-    background-color: #EBEBEB;
+    background-color: ${(props) => props.theme.backgroundActive};
   }
 
   img {
@@ -28,7 +28,7 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid ${(props) => props.theme.border};
   padding-right: 15px;
   margin-left: 15px;
 
@@ -43,17 +43,17 @@ export const Content = styled.div`
 
     .chatName {
       font-size: 17px;
-      color: #000;
+      color: ${(props) => props.theme.text};
     }
     
     .chatData {
       font-size: 12px;
-      color: #999;
+      color: ${(props) => props.theme.lastMessage};
     }
 
     .last-msg{
       font-size: 14px;
-      color: #999;
+      color: ${(props) => props.theme.lastMessage};
       display: flex;
       width: 100%;
       margin-bottom: 0.5rem;

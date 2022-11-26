@@ -8,7 +8,7 @@ export const ChatContainer = styled.div`
 
 export const ChatHeader = styled.header`
   height: 60px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid ${(props) => props.theme.border};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,7 +27,7 @@ export const ChatHeader = styled.header`
 
     .name {
       font-size: 17px;
-      color: #000;
+      color: ${(props) => props.theme.text};
     }
   }
 
@@ -51,7 +51,8 @@ export const ChatHeader = styled.header`
 export const ChatBody = styled.div`
   flex: 1;
   overflow-y: auto;
-  background-color: #E5DDD5;
+  /* background-color: #E5DDD5; */
+  background-color: ${(props) => props.theme.chatBackground};
   padding: 20px 30px;
 
   ::-webkit-scrollbar {
@@ -69,6 +70,7 @@ export const ChatEmoji = styled.div`
   height: 260px;
   overflow-y: hidden;
   transition: all ease 0.3s;
+  background-color: ${(props) => props.theme.backgroundSecond};
 `
 
 export const ChatFooter = styled.footer`
@@ -90,7 +92,7 @@ export const ChatFooter = styled.footer`
       height: 40px;
       border: 0;
       outline: 0;
-      background-color: #FFF;
+      background-color: ${(props) => props.theme.backgroundSecond};
       border-radius: 20px;
       font-size: 15px;
       color: #4A4A4A;

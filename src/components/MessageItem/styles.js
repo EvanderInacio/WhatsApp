@@ -8,7 +8,6 @@ export const Message = styled.div`
 export const Item = styled.div`
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 1px 1px #ccc;
   display: flex;
   flex-direction: column;
   padding: 3px;

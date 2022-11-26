@@ -7,10 +7,10 @@ export const Chat = styled.div`
   left: 0;
   top: 0;
   bottom: 0;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.background};
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid ${(props) => props.theme.border};
   transition: all ease 0.5s;
   
   .header {
@@ -34,7 +34,7 @@ export const Chat = styled.div`
       line-height: 40px;
       flex: 1;
       font-weight: bold;
-      color: #ffff;
+      color: #fff;
       margin-left: 20px;
     }
   }
@@ -50,7 +50,7 @@ export const Chat = styled.div`
       cursor: pointer;
 
       &:hover{
-        background-color: #F5F5F5;
+        background-color: ${(props) => props.theme.backgroundHover};
       }
 
       img {
@@ -62,7 +62,7 @@ export const Chat = styled.div`
       
       .name{
         font-size: 17px;
-        color: #000;
+        color: ${(props) => props.theme.text};
       }
     }
 

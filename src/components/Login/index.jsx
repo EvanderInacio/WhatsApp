@@ -31,7 +31,6 @@ export function Login({ onReceive }) {
 
   return (
     <LoginComponent>
-      <button onClick={handleFacebookLogin}>Logar com facebook</button>
       <button onClick={handleGoogleLogin}>Logar com Google</button>
       <button onClick={handleGithubLogin}>Logar com Github</button>
     </LoginComponent>
