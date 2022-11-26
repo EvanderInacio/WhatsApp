@@ -8,7 +8,8 @@ export function ChatIntro() {
       <i><WhatsAppIcon style={{color: "#4ADF83", fontSize: "250px"}}/></i>
       <h1>WhatsApp Web</h1>
 
-      <h2>Envie e receba mensagens sem precisar manter seu celular conectado à internet.   <br/>
+      <h2>
+        Envie e receba mensagens sem precisar manter seu celular conectado à internet.   <br/>
         Use o WhatsApp em até quatro aparelhos conectados e um celular ao mesmo tempo.
       </h2>
 
