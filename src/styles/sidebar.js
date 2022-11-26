@@ -12,14 +12,14 @@ export const Sidebar = styled.div`
     background-color: ${(props) => props.theme.background};
     overflow-y: auto;
 
-    @media (max-width: 900px) {
-    width: 100%;
-  }
+    @media (max-width: 994px) {
+      width: 100vw;
+    }
   }
 
-  @media(max-width: 900px) {
+  @media(max-width: 994px) {
     position: fixed;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     flex: 1;
     z-index: 1;
@@ -33,6 +33,10 @@ export const HeaderSidebar = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 0 15px;
+
+  @media (max-width: 994px) {
+    width: 100vw;
+  }
   
   .header {
     display: flex;
@@ -74,6 +78,10 @@ export const HeaderSidebar = styled.header`
 export const Search = styled.div`
   background: ${(props) => props.theme.background};
   padding: 5px 15px;
+
+  @media (max-width: 994px) {
+    width: 100vw;
+  }
 
   .input{
     background-color: ${(props) => props.theme.backgroundSecond};

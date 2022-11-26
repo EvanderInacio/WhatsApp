@@ -11,7 +11,7 @@ export const Intro = styled.div`
  display: flex;
 
 
- @media (max-width: 900px) {
+ @media (max-width: 994px) {
   display: none;
  }
 

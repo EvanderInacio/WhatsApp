@@ -13,7 +13,7 @@ export const Chat = styled.div`
   border-right: 1px solid ${(props) => props.theme.border};
   transition: all ease 0.5s;
 
-  @media(max-width: 900px) {
+  @media(max-width: 994px ) {
     position: fixed;
     width: 100%;
     height: 100%;

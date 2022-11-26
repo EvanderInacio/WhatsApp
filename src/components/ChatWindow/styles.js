@@ -5,7 +5,7 @@ export const ChatContainer = styled.div`
   flex-direction: column;
   height: 100%;
 
-  @media (max-width: 900px) {
+  @media (max-width: 994px) {
     position: fixed;
     top: 0;
     left: 0;
@@ -35,7 +35,7 @@ export const ChatHeader = styled.header`
       display: none;
     }
 
-  @media (max-width: 900px) {
+  @media (max-width: 994px) {
     .backMobile {
       display: flex;
       margin-left: .5rem;
