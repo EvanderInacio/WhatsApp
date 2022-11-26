@@ -11,6 +11,19 @@ export const Sidebar = styled.div`
     flex: 1;  
     background-color: ${(props) => props.theme.background};
     overflow-y: auto;
+
+    @media (max-width: 900px) {
+    width: 100%;
+  }
+  }
+
+  @media(max-width: 900px) {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    z-index: 1;
+    display: ${(props) => props.display};
   }
 `
 

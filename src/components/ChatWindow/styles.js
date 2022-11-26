@@ -4,6 +4,19 @@ export const ChatContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+
+  @media (max-width: 900px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    flex: 1;
+    max-width: 100%;
+    width: 100vw;
+    height: 100vh;
+    z-index: 3;
+    transition: all ease 1s;
+  }
+  
 `
 
 export const ChatHeader = styled.header`
@@ -18,11 +31,27 @@ export const ChatHeader = styled.header`
     align-items: center;
     cursor: pointer;
 
+    .backMobile {
+      display: none;
+    }
+
+  @media (max-width: 900px) {
+    .backMobile {
+      display: flex;
+      margin-left: .5rem;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all ease 1s;
+    }
+  }
+
     img {
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      margin: 0 15px;
+      margin-left: .8rem;
+      margin-right: .5rem;
     }
 
     .name {
@@ -51,7 +80,6 @@ export const ChatHeader = styled.header`
 export const ChatBody = styled.div`
   flex: 1;
   overflow-y: auto;
-  /* background-color: #E5DDD5; */
   background-color: ${(props) => props.theme.chatBackground};
   padding: 20px 30px;
 
@@ -93,9 +121,9 @@ export const ChatFooter = styled.footer`
       border: 0;
       outline: 0;
       background-color: ${(props) => props.theme.backgroundSecond};
+      color: ${(props) => props.theme.text};
       border-radius: 20px;
       font-size: 15px;
-      color: #4A4A4A;
       padding-left: 15px;
     }
   }

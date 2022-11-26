@@ -1,4 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
+import Api from '../../Api'
+import { MessageItem } from '../MessageItem'
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 
@@ -9,32 +11,29 @@ import {
   ChatFooter,
   ChatHeader
 } from './styles'
-import SearchIcon from '@mui/icons-material/Search'
-import AttachFileIcon from '@mui/icons-material/AttachFile'
-import MoreVertIcon from '@mui/icons-material/MoreVert'
+import LogoutIcon from '@mui/icons-material/Logout';
 import InsertEmoticonIcon from '@mui/icons-material/InsertEmoticon'
 import CloseIcon from '@mui/icons-material/Close'
-import Api from '../../Api'
-import { MessageItem } from '../MessageItem'
 import SendIcon from '@mui/icons-material/Send'
 import MicIcon from '@mui/icons-material/Mic'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 
-export function ChatWindow({user, data}) {
-
+export function ChatWindow({ user, data, mobileOpen, setMobileOpen }) {
   const body = useRef()
 
   let recognition = null
-  let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
-  if(SpeechRecognition !== undefined) {
+  let SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition
+  if (SpeechRecognition !== undefined) {
     recognition = new SpeechRecognition()
   }
 
   const [emojiOpen, setEmojiOpen] = useState(false)
   const [text, setText] = useState('')
   const [listening, setListening] = useState(false)
-  const [list, setList ] = useState([])
+  const [list, setList] = useState([])
   const [users, setUsers] = useState([])
-  
+
   useEffect(() => {
     setList([])
     let unsub = Api.onChatContent(data.chatId, setList, setUsers)
@@ -43,7 +42,8 @@ export function ChatWindow({user, data}) {
 
   useEffect(() => {
     if (body.current.scrollHeight > body.current.offsetHeight) {
-      body.current.scrollTop = body.current.scrollHeight - body.current.offsetHeight
+      body.current.scrollTop =
+        body.current.scrollHeight - body.current.offsetHeight
     }
   }, [list])
 
@@ -60,64 +60,66 @@ export function ChatWindow({user, data}) {
   }
 
   const handleMicClick = () => {
-    if(recognition !== null ) {
-
+    if (recognition !== null) {
       recognition.onstart = () => {
         setListening(true)
       }
       recognition.onend = () => {
         setListening(false)
       }
-      recognition.onresult = (e) => {
-        setText( e.results[0][0].transcript )
+      recognition.onresult = e => {
+        setText(e.results[0][0].transcript)
       }
 
       recognition.start()
     }
   }
 
-  const handleInputKeyUp = (e) => {
-    if(e.keyCode == 13){
+  const handleInputKeyUp = e => {
+    if (e.keyCode == 13) {
       handleSendClick()
     }
   }
 
   const handleSendClick = () => {
-    if(text !== '') {
-      Api.sendMessage(data, user.id, 'text', text, users )
+    if (text !== '') {
+      Api.sendMessage(data, user.id, 'text', text, users)
       setText('')
       setEmojiOpen(false)
     }
   }
 
+  const handleBack = () => {
+    setMobileOpen(!mobileOpen)
+  }
+
+  const logout = () => {
+    window.location.reload()
+  }
+
   return (
-    <ChatContainer>
+    <ChatContainer
+      style={{ display: !mobileOpen ? 'none' : 'flex' }}
+    >
       <ChatHeader>
         <div className="header">
+          <div className="backMobile" onClick={handleBack}>
+            <ArrowBackIcon style={{ color: '#919191' }} />
+          </div>
           <img src={data.image} />
           <div className="name">{data.title}</div>
         </div>
 
         <div className="buttons">
-          <div className="btn">
-            <SearchIcon style={{ color: '#919191' }} />
-          </div>
-          <div className="btn">
-            <AttachFileIcon style={{ color: '#919191' }} />
-          </div>
-          <div className="btn">
-            <MoreVertIcon style={{ color: '#919191' }} />
+          <div className="btn" onClick={logout}>
+            <LogoutIcon style={{ color: '#919191' }} />
           </div>
         </div>
       </ChatHeader>
 
       <ChatBody ref={body}>
         {list?.map((item, key) => (
-          <MessageItem 
-            key={key}
-            data={item}
-            user={user}
-          />
+          <MessageItem key={key} data={item} user={user} />
         ))}
       </ChatBody>
 

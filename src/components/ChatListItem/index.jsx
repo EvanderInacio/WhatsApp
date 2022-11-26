@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Container, Content } from './styles'
 
-export function ChatList({onClick, active, data}) {
+export function ChatList({onClick, active, data, onMobileClick}) {
   const [time, setTime] = useState('')
 
   useEffect(() => {
@@ -17,7 +17,8 @@ export function ChatList({onClick, active, data}) {
   }, [data])
 
   return (
-    <Container className={active ? 'active' : ''} onClick={onClick}>
+    <div onClick={onMobileClick}>
+      <Container className={active ? 'active' : ''} onClick={onClick}>
      <img src={data.image} />
       <Content>
         <div className="chatListItem">
@@ -31,5 +32,6 @@ export function ChatList({onClick, active, data}) {
         </div>
       </Content>
     </Container>
+    </div>
   )
 }

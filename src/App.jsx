@@ -25,6 +25,7 @@ function App() {
   const [user, setUser] = useState(null)
   const [showNewChat, setShowNewChat] = useState(false)
   const [isDarkTheme, setIsDarkTheme] = useState(true)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
     if (user !== null) {
@@ -56,7 +57,7 @@ function App() {
     <ThemeProvider theme={isDarkTheme ? lightTheme : darkTheme}>
       <GlobalStyled /> 
       <Container>
-        <Sidebar>
+        <Sidebar display={mobileOpen ? 'none' : 'flex'}>
           <NewChat
             chatList={chatList}
             user={user}
@@ -100,13 +101,19 @@ function App() {
                 data={item}
                 active={activeChat.chatId === chatList[key].chatId}
                 onClick={() => setActiveChat(chatList[key])}
+                onMobileClick={() => setMobileOpen(true)}
               />
             ))}
           </div>
         </Sidebar>
         <Content>
           {activeChat.chatId !== undefined && (
-            <ChatWindow user={user} data={activeChat} />
+            <ChatWindow 
+              user={user} 
+              data={activeChat}
+              setMobileOpen={setMobileOpen} 
+              mobileOpen={mobileOpen} 
+            />
           )}
 
           {activeChat.chatId === undefined && <ChatIntro />}

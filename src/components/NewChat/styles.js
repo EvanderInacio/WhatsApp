@@ -12,6 +12,15 @@ export const Chat = styled.div`
   flex-direction: column;
   border-right: 1px solid ${(props) => props.theme.border};
   transition: all ease 0.5s;
+
+  @media(max-width: 900px) {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    z-index: 2;
+    display: ${(props) => props.display};
+  }
   
   .header {
     display: flex;
